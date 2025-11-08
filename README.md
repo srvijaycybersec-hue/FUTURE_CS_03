@@ -2,28 +2,28 @@
 
 A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
 
-This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
+This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest and in transit.
 
 
 ---
 
 🧠 Features
 
-AES-256-GCM encryption (authenticated encryption for confidentiality + integrity)
+AES-256-GCM encryption (confidentiality + integrity)
 
-Secure file upload and encrypted storage
+Secure upload and encrypted storage
 
-File download with automatic decryption
+Decrypt-on-download
 
-Encrypted filename masking (server never exposes real file names)
+Hidden real filenames (randomized storage names)
 
-Flash message UI feedback (upload, delete, errors)
+Flash message feedback for all actions
 
-Secure environment-based key management
+Environment-based key management
 
-Simple HTML templates for upload & list view
+Simple HTML templates
 
-Designed for local or enterprise security demonstrations
+Works on Windows and Linux
 
 
 
@@ -33,39 +33,39 @@ Designed for local or enterprise security demonstrations
 
 secure-file-sharing/
 │
-├── app.py                    # Main Flask app
-├── encryption_utils.py       # AES-GCM encryption/decryption utilities
-├── requirements.txt          # Required Python libraries
+├── app.py
+├── encryption_utils.py
+├── requirements.txt
 ├── templates/
-│   ├── upload.html           # File upload page
-│   └── files.html            # File listing & download page
-├── encrypted_store/          # Encrypted files stored here
-├── tmp_uploads/              # Temporary plaintext uploads (auto-deleted)
-└── README.md                 # Project documentation
+│   ├── upload.html
+│   └── files.html
+├── encrypted_store/
+├── tmp_uploads/
+└── README.md
 
 
 ---
 
-⚙️ Setup Instructions (Windows 10 / Linux)
+⚙️ Setup Instructions
 
-1️⃣ Clone or Download the Project
+1. Clone or Download the Project
 
 git clone https://github.com/yourusername/secure-file-sharing.git
 cd secure-file-sharing
 
-2️⃣ Create and Activate Virtual Environment
+2. Create and Activate Virtual Environment
 
-Windows (PowerShell):
+Windows:
 
 python -m venv venv
-.\venv\Scripts\activate
+venv\Scripts\activate
 
-Linux/Mac:
+Linux / macOS:
 
 python3 -m venv venv
 source venv/bin/activate
 
-3️⃣ Install Dependencies
+3. Install Dependencies
 
 pip install -r requirements.txt
 
@@ -74,12 +74,13 @@ pip install -r requirements.txt
 
 🔑 Generate and Set Encryption Key
 
-This app requires a 32-byte AES key stored in an environment variable named FILE_ENCRYPTION_KEY.
+This app needs a 32-byte AES key stored in an environment variable named FILE_ENCRYPTION_KEY.
 
 Option 1 — Generate with Python
 
 python - <<'PY'
-import os; print(os.urandom(32).hex())
+import os
+print(os.urandom(32).hex())
 PY
 
 Copy the 64-character hex output.
@@ -91,17 +92,17 @@ $key
 
 Set Environment Variables
 
-Windows (temporary):
+Windows (PowerShell):
 
-$env:FILE_ENCRYPTION_KEY = "paste_your_64_hex_key_here"
-$env:FLASK_SECRET = "random_flask_secret_here"
+setx FILE_ENCRYPTION_KEY "paste_your_64_hex_key_here"
+setx FLASK_SECRET "random_flask_secret_here"
 
-Linux/Mac (temporary):
+Linux / macOS (temporary):
 
 export FILE_ENCRYPTION_KEY="paste_your_64_hex_key_here"
 export FLASK_SECRET="random_flask_secret_here"
 
-> ⚠️ Never hardcode your key inside the code or commit it to GitHub.
+> ⚠️ Never hard-code your key inside the code or commit it to GitHub.
 
 
 
@@ -112,9 +113,9 @@ export FLASK_SECRET="random_flask_secret_here"
 
 python app.py
 
-Open your browser and visit:
+Then open your browser at:
 
-👉 http://127.0.0.1:5000/
+http://127.0.0.1:5000/
 
 
 ---
@@ -123,8 +124,8 @@ Open your browser and visit:
 
 Page URL Description
 
-Home / Files / List all encrypted files, with download & delete options
-Upload /upload Upload and encrypt a new file
+Home / Files / List all encrypted files
+Upload /upload Upload and encrypt new file
 
 
 
@@ -134,29 +135,28 @@ Upload /upload Upload and encrypt a new file
 
 Security Aspect Implementation
 
-Encryption Algorithm AES-256-GCM (authenticated encryption)
-Key Storage Environment variable (FILE_ENCRYPTION_KEY)
-Filename Protection Stored filename is random (xxxx.enc) — real name encrypted inside
-Integrity GCM mode provides built-in integrity check
-Transport Security Use HTTPS or a reverse proxy (e.g., Nginx + TLS)
-Temporary Files Removed immediately after encryption
-CSRF Protection Basic Flask form handling (add CSRF token if multi-user)
-Auth Support Not included — add login & user roles for real-world use
+Algorithm AES-256-GCM
+Key Storage Environment variable
+Filename Protection Random encrypted names
+Integrity AES-GCM authentication tag
+Transport Security Use HTTPS / reverse proxy
+Temporary Files Auto-deleted after use
+Authentication Not included (add if multi-user)
 
 
 
 ---
 
-📁 Example Encrypted File Structure
+📁 Encrypted File Format
 
-Each encrypted file stored in encrypted_store/ has this binary format:
+Each file in encrypted_store/ uses this structure:
 
 nonce (12 bytes)
 + filename_length (2 bytes)
 + filename (UTF-8)
 + ciphertext (AES-GCM)
 
-When decrypted, the original filename and content are restored.
+Decryption restores the original filename and content.
 
 
 ---
@@ -165,10 +165,10 @@ When decrypted, the original filename and content are restored.
 
 Issue Cause Solution
 
-cannot import name 'encrypt_file' Wrong filename (e.g., encryption _utils.py with a space) Rename to encryption_utils.py
-RuntimeError: FILE_ENCRYPTION_KEY not set Environment variable missing Set key using PowerShell or export
-File not downloading HTML missing download link Ensure download_name is used in send_file()
-Memory issues Large files encrypted fully in RAM Use chunked streaming encryption (optional)
+cannot import name 'encrypt_file' Wrong file name (encryption _utils.py) Rename to encryption_utils.py
+FILE_ENCRYPTION_KEY not set Missing environment variable Set the key using commands above
+File doesn’t download Missing download_name Check send_file() line
+Memory errors Very large files Use chunked encryption (optional)
 
 
 
@@ -176,17 +176,17 @@ Memory issues Large files encrypted fully in RAM Use chunked streaming encryptio
 
 🚀 Future Enhancements
 
-[ ] User authentication (login/register)
+[ ] Add login & authentication
 
-[ ] Role-based access control (admin/user)
+[ ] Role-based access (admin/user)
 
-[ ] Database integration for file metadata
+[ ] Database for file metadata
 
-[ ] Expiring or one-time download links
+[ ] Expiring download links
 
-[ ] Streaming encryption for very large files
+[ ] Streaming encryption for large files
 
-[ ] Frontend redesign (Bootstrap or Tailwind)
+[ ] UI with Bootstrap or Tailwind
 
 
 
@@ -194,13 +194,13 @@ Memory issues Large files encrypted fully in RAM Use chunked streaming encryptio
 
 🧾 License
 
-This project is released under the MIT License.
-You are free to use, modify, and distribute it with attribution.
+Released under the MIT License.
+You are free to use, modify, and distribute this project with attribution.
 
 
 ---
 
-🧠 Author
+👨‍💻 Author
 
 Developed by: Vijay S R
-Tech Stack: Python Flask · AES-GCM · Cryptography Library · HTML
+Stack: Flask · AES-GCM · Python · HTML · Cryptography
