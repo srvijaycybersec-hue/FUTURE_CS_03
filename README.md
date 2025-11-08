@@ -58,13 +58,13 @@ secure-file-sharing/
 
 ⚙️ Setup Instructions (Windows 10 / Linux)
 
-1️⃣ # Clone or Download the Project
+# 1️⃣  Clone or Download the Project
 
 git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03/secure-file-sharing.git
 
 cd secure-file-sharing
 
-2️⃣ Create and Activate Virtual Environment
+# 2️⃣ Create and Activate Virtual Environment
 
 # Windows (PowerShell):
 
@@ -76,7 +76,7 @@ python -m venv venv
 python3 -m venv venv
 source venv/bin/activate
 
-3️⃣ # Install Dependencies
+# 3️⃣  Install Dependencies
 
 pip install -r requirements.txt
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 
 This app requires a 32-byte AES key stored in an environment variable named FILE_ENCRYPTION_KEY.
 
-Option 1 — Generate with Python
+# Option 1 — Generate with Python
 
 python - <<'PY'
 import os; print(os.urandom(32).hex())
@@ -95,19 +95,19 @@ PY
 
 Copy the 64-character hex output.
 
-Option 2 — Generate with PowerShell
+# Option 2 — Generate with PowerShell
 
 $key = -join ((1..32) | ForEach-Object { "{0:X2}" -f (Get-Random -Maximum 256) })
 $key
 
 Set Environment Variables
 
-Windows (temporary):
+# Windows (temporary):
 
 $env:FILE_ENCRYPTION_KEY = "paste_your_64_hex_key_here"
 $env:FLASK_SECRET = "random_flask_secret_here"
 
-Linux/Mac (temporary):
+# Linux/Mac (temporary):
 
 export FILE_ENCRYPTION_KEY="paste_your_64_hex_key_here"
 export FLASK_SECRET="random_flask_secret_here"
