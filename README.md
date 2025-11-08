@@ -1,9 +1,5 @@
 🔐  FUTURE_CS_03---Secure File Sharing System (Flask + AES Encryption + HTML)
 
-A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
-
-This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
-
 Intern Details
 
 | Field   | Details                                |
@@ -12,6 +8,12 @@ Intern Details
 | Role    | Cybersecurity Intern                   |
 | Program | Future Interns — Cybersecurity Program |
 | Task    | Secure File Sharing System |
+
+A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
+
+This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
+
+
 
 ---
 
