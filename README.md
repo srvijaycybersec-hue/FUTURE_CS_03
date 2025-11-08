@@ -32,6 +32,7 @@ Designed for local or enterprise security demonstrations
 ### 🧩 Project Structure
 
 secure-file-sharing/
+
 │
 ├── app.py                 # Main Flask app
 
