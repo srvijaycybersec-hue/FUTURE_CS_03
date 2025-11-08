@@ -33,15 +33,15 @@ Designed for local or enterprise security demonstrations
 
 secure-file-sharing/
 │
-├── app.py                    # Main Flask app
-├── encryption_utils.py       # AES-GCM encryption/decryption utilities
-├── requirements.txt          # Required Python libraries
-├── templates/
-│   ├── upload.html           # File upload page
-│   └── files.html            # File listing & download page
-├── encrypted_store/          # Encrypted files stored here
-├── tmp_uploads/              # Temporary plaintext uploads (auto-deleted)
-└── README.md                 # Project documentation
+├── app.py                 # Main Flask app
+├── encryption_utils.py    # AES encryption/decryption logic
+├── requirements.txt       # Dependencies list
+├── templates/             # HTML templates
+│   ├── upload.html
+│   └── files.html
+├── encrypted_store/       # Encrypted file storage
+├── tmp_uploads/           # Temporary upload folder
+└── README.md
 
 
 ---
