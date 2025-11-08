@@ -1,164 +1,212 @@
-🔐 Secure File Sharing System
+🔐  FUTURE_CS_03---Secure File Sharing System (Flask + AES Encryption + HTML)
 
-A Secure File Sharing Web Application built using Python Flask and Flask-WTF, designed to allow users to upload and download files securely.
-It ensures data confidentiality using AES encryption and secure key management, providing a safe and simple interface for file sharing.
+A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
 
+This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
 
----
-
-🚀 Features
-
-🧩 User-Friendly Interface (HTML + Flask-WTF forms)
-
-🔒 AES File Encryption & Decryption
-
-📂 Secure Upload and Download System
-
-🔑 Unique Encryption Key for Each File
-
-🧠 Basic Key Management Logic
-
-🧾 File Integrity Verification
-
-
+👤 Intern Details
+Field 	Details
+Name 	Vijay S R
+Role 	Cybersecurity Intern
+Program 	Future Interns — Cybersecurity Internship
+Task 	Secure File Sharing System
 
 ---
 
-🧰 Tech Stack
+🧠 Features
 
-Component Technology Used
+AES-256-GCM encryption (authenticated encryption for confidentiality + integrity)
 
-Backend Python Flask
-Frontend HTML, CSS, Flask-WTF
-Encryption AES (Advanced Encryption Standard)
-Database (optional) SQLite / File-based storage
-Environment VS Code / Kali Linux / Ubuntu
+Secure file upload and encrypted storage
+
+File download with automatic decryption
+
+Encrypted filename masking (server never exposes real file names)
+
+Flash message UI feedback (upload, delete, errors)
+
+Secure environment-based key management
+
+Simple HTML templates for upload & list view
+
+Designed for local or enterprise security demonstrations
 
 
 
 ---
 
-📁 Project Structure
+🧩 Project Structure
 
-SecureFileShare/
+secure-file-sharing/
 │
-├── app.py                # Main Flask Application
+├── app.py                    # Main Flask app
+├── encryption_utils.py       # AES-GCM encryption/decryption utilities
+├── requirements.txt          # Required Python libraries
 ├── templates/
-│   ├── upload.html        # File upload page
-│   ├── download.html      # File download page
-│   └── index.html         # Home page
-│
-├── static/
-│   ├── css/
-│   └── js/
-│
-├── uploads/              # Encrypted uploaded files
-├── decrypted/            # Temporary decrypted files
-├── encryption.py          # AES encryption/decryption logic
-├── forms.py               # Flask-WTF forms
-├── README.md              # Project documentation
-└── requirements.txt       # Python dependencies
+│   ├── upload.html           # File upload page
+│   └── files.html            # File listing & download page
+├── encrypted_store/          # Encrypted files stored here
+├── tmp_uploads/              # Temporary plaintext uploads (auto-deleted)
+└── README.md                 # Project documentation
 
 
 ---
 
-⚙️ Installation & Setup
+⚙️ Setup Instructions (Windows 10 / Linux)
 
-1️⃣ Clone the Repository
+1️⃣ Clone or Download the Project
 
-git clone https://github.com/yourusername/SecureFileShare.git
-cd SecureFileShare
+git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03/secure-file-sharing.git
+cd secure-file-sharing
 
-2️⃣ Create a Virtual Environment
+2️⃣ Create and Activate Virtual Environment
+
+Windows (PowerShell):
 
 python -m venv venv
-source venv/bin/activate   # On Linux/Mac
-venv\Scripts\activate      # On Windows
+.\venv\Scripts\activate
+
+Linux/Mac:
+
+python3 -m venv venv
+source venv/bin/activate
 
 3️⃣ Install Dependencies
 
 pip install -r requirements.txt
 
-4️⃣ Run the Application
+
+---
+
+🔑 Generate and Set Encryption Key
+
+This app requires a 32-byte AES key stored in an environment variable named FILE_ENCRYPTION_KEY.
+
+Option 1 — Generate with Python
+
+python - <<'PY'
+import os; print(os.urandom(32).hex())
+PY
+
+Copy the 64-character hex output.
+
+Option 2 — Generate with PowerShell
+
+$key = -join ((1..32) | ForEach-Object { "{0:X2}" -f (Get-Random -Maximum 256) })
+$key
+
+Set Environment Variables
+
+Windows (temporary):
+
+$env:FILE_ENCRYPTION_KEY = "paste_your_64_hex_key_here"
+$env:FLASK_SECRET = "random_flask_secret_here"
+
+Linux/Mac (temporary):
+
+export FILE_ENCRYPTION_KEY="paste_your_64_hex_key_here"
+export FLASK_SECRET="random_flask_secret_here"
+
+> ⚠️ Never hardcode your key inside the code or commit it to GitHub.
+
+
+
+
+---
+
+▶️ Run the Application
 
 python app.py
 
-Then open your browser and go to:
+Open your browser and visit:
 
-http://127.0.0.1:5000
+👉 http://127.0.0.1:5000/
 
 
 ---
 
-🔑 How It Works
+🌐 Web Interface
 
-1. Upload a file → User selects a file through the upload form.
+Page URL Description
 
-
-2. Encryption process → The file is encrypted using AES before saving to the server.
-
-
-3. Download request → When a user requests download, the file is decrypted and provided securely.
-
-
-4. Temporary storage → Decrypted files are deleted after the session to ensure security.
-
+Home / Files / List all encrypted files, with download & delete options
+Upload /upload Upload and encrypt a new file
 
 
 
 ---
 
-🧩 Example Workflow
+🔒 Security Design
 
-Step Action Description
+Security Aspect Implementation
 
-1️⃣ Upload file Select a file from local system
-2️⃣ Encryption File encrypted with AES algorithm
-3️⃣ Download file System decrypts and allows secure download
-4️⃣ Cleanup Decrypted copy auto-deleted after session
-
-
-
----
-
-🧠 Security Highlights
-
-AES 256-bit Encryption
-
-No plaintext files stored on the server
-
-Separate directories for encrypted and decrypted files
-
-Flask-WTF used to prevent CSRF attacks
-
-Temporary files cleaned automatically
-
----
-
-💻 Future Enhancements
-
-Add User Authentication (Login System)
-
-Use Database for Key Storage
-
-Enable File Sharing via Secure Link / Token
-
-Add Email Notification for Shared Files
+Encryption Algorithm AES-256-GCM (authenticated encryption)
+Key Storage Environment variable (FILE_ENCRYPTION_KEY)
+Filename Protection Stored filename is random (xxxx.enc) — real name encrypted inside
+Integrity GCM mode provides built-in integrity check
+Transport Security Use HTTPS or a reverse proxy (e.g., Nginx + TLS)
+Temporary Files Removed immediately after encryption
+CSRF Protection Basic Flask form handling (add CSRF token if multi-user)
+Auth Support Not included — add login & user roles for real-world use
 
 
 
 ---
 
-📜 License
+📁 Example Encrypted File Structure
 
-This project is licensed under the MIT License — feel free to use, modify, and distribute.
+Each encrypted file stored in encrypted_store/ has this binary format:
+
+nonce (12 bytes)
++ filename_length (2 bytes)
++ filename (UTF-8)
++ ciphertext (AES-GCM)
+
+When decrypted, the original filename and content are restored.
 
 
 ---
 
-👨‍💻 Author
+🧰 Troubleshooting
 
-Vijay S R
-Internship Secure File Sharing Project
-📧 [srvijay.cybersec@gmail.com]
-🌐 GitHub: https://github.com/srvijaycybersec-hue
+Issue Cause Solution
+
+cannot import name 'encrypt_file' Wrong filename (e.g., encryption _utils.py with a space) Rename to encryption_utils.py
+RuntimeError: FILE_ENCRYPTION_KEY not set Environment variable missing Set key using PowerShell or export
+File not downloading HTML missing download link Ensure download_name is used in send_file()
+Memory issues Large files encrypted fully in RAM Use chunked streaming encryption (optional)
+
+
+
+---
+
+🚀 Future Enhancements
+
+[ ] User authentication (login/register)
+
+[ ] Role-based access control (admin/user)
+
+[ ] Database integration for file metadata
+
+[ ] Expiring or one-time download links
+
+[ ] Streaming encryption for very large files
+
+[ ] Frontend redesign (Bootstrap or Tailwind)
+
+
+
+---
+
+🧾 License
+
+This project is released under the MIT License.
+You are free to use, modify, and distribute it with attribution.
+
+
+---
+
+🧠 Author
+
+Developed by: Vijay S R
+Tech Stack: Python Flask · AES-GCM · Cryptography Library · HTML
