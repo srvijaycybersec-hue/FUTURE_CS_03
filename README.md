@@ -48,6 +48,7 @@ secure-file-sharing/
 ├── encrypted_store/       # Encrypted file storage
 
 ├── tmp_uploads/           # Temporary upload folder
+
 └── README.md
 
 
