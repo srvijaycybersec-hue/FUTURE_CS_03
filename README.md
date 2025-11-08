@@ -4,12 +4,14 @@ A secure file sharing web application built using Flask and AES-GCM encryption, 
 
 This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
 
-👤 Intern Details
-Field 	Details
-Name 	Vijay S R
-Role 	Cybersecurity Intern
-Program 	Future Interns — Cybersecurity Internship
-Task 	Secure File Sharing System
+Intern Details
+
+| Field   | Details                                |
+|---------|----------------------------------------|
+| Name    | Vijay S R                              |
+| Role    | Cybersecurity Intern                   |
+| Program | Future Interns — Cybersecurity Program |
+| Task    | Secure File Sharing System |
 
 ---
 
