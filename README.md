@@ -1,18 +1,8 @@
-# 🔐  FUTURE_CS_03---Secure File Sharing System (Flask + AES Encryption + HTML)
-
-Intern Details
-
-| Field   | Details                                |
-|---------|----------------------------------------|
-| Name    | Vijay S R                              |
-| Role    | Cybersecurity Intern                   |
-| Program | Future Interns — Cybersecurity Program |
-| Task    | Secure File Sharing System |
+🔐 Secure File Sharing System (Flask + AES Encryption)
 
 A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
 
 This project demonstrates end-to-end encryption handling for uploaded files — protecting data both at rest (on disk) and in transit (when combined with HTTPS).
-
 
 
 ---
@@ -58,23 +48,26 @@ secure-file-sharing/
 
 ⚙️ Setup Instructions (Windows 10 / Linux)
 
-# 1️⃣  Clone or Download the Project
+1️⃣ Clone or Download the Project
 
-bash git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03/secure-file-sharing.git
+git clone https://github.com/yourusername/secure-file-sharing.git
 cd secure-file-sharing
 
-# 2️⃣ Create and Activate Virtual Environment
-# Windows (PowerShell):
-bash
+2️⃣ Create and Activate Virtual Environment
+
+Windows (PowerShell):
+
 python -m venv venv
 .\venv\Scripts\activate
 
-# Linux/Mac:
+Linux/Mac:
+
 python3 -m venv venv
 source venv/bin/activate
 
-# 3️⃣  Install Dependencies
-bash pip install -r requirements.txt
+3️⃣ Install Dependencies
+
+pip install -r requirements.txt
 
 
 ---
@@ -83,25 +76,27 @@ bash pip install -r requirements.txt
 
 This app requires a 32-byte AES key stored in an environment variable named FILE_ENCRYPTION_KEY.
 
-# Option 1 — Generate with Python
+Option 1 — Generate with Python
+
 python - <<'PY'
 import os; print(os.urandom(32).hex())
 PY
 
 Copy the 64-character hex output.
 
-# Option 2 — Generate with PowerShell
+Option 2 — Generate with PowerShell
+
 $key = -join ((1..32) | ForEach-Object { "{0:X2}" -f (Get-Random -Maximum 256) })
 $key
 
 Set Environment Variables
 
-# Windows (temporary):
+Windows (temporary):
 
 $env:FILE_ENCRYPTION_KEY = "paste_your_64_hex_key_here"
 $env:FLASK_SECRET = "random_flask_secret_here"
 
-# Linux/Mac (temporary):
+Linux/Mac (temporary):
 
 export FILE_ENCRYPTION_KEY="paste_your_64_hex_key_here"
 export FLASK_SECRET="random_flask_secret_here"
@@ -114,6 +109,7 @@ export FLASK_SECRET="random_flask_secret_here"
 ---
 
 ▶️ Run the Application
+
 python app.py
 
 Open your browser and visit:
