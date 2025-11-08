@@ -65,6 +65,7 @@ cd secure-file-sharing
 
 # 2️⃣ Create and Activate Virtual Environment
 # Windows (PowerShell):
+```bash
 python -m venv venv
 .\venv\Scripts\activate
 
