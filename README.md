@@ -33,7 +33,6 @@ Designed for local or enterprise security demonstrations
 
 secure-file-sharing/
 
-│
 ├── app.py                 # Main Flask app
 
 ├── encryption_utils.py    # AES encryption/decryption logic
@@ -41,7 +40,9 @@ secure-file-sharing/
 ├── requirements.txt       # Dependencies list
 
 ├── templates/             # HTML templates
+
 │   ├── upload.html
+
 │   └── files.html
 
 ├── encrypted_store/       # Encrypted file storage
