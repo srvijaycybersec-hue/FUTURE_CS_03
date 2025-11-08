@@ -1,4 +1,4 @@
-🔐 FUTURE_CS_03---Secure File Sharing System (Flask + AES Encryption)
+#🔐 FUTURE_CS_03---Secure File Sharing System (Flask + AES Encryption)
 
 A secure file sharing web application built using Flask and AES-GCM encryption, allowing users to upload, encrypt, download (decrypt), and delete files safely through a simple HTML interface.
 
