@@ -29,7 +29,7 @@ Designed for local or enterprise security demonstrations
 
 ---
 
-🧩 Project Structure
+### 🧩 Project Structure
 
 secure-file-sharing/
 │
