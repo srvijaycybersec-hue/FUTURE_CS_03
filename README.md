@@ -59,8 +59,8 @@ secure-file-sharing/
 ⚙️ Setup Instructions (Windows 10 / Linux)
 
 # 1️⃣  Clone or Download the Project
-`git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03/secure-file-sharing.git
-`cd secure-file-sharing`
+git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03/secure-file-sharing.git
+cd secure-file-sharing
 
 # 2️⃣ Create and Activate Virtual Environment
 # Windows (PowerShell):
