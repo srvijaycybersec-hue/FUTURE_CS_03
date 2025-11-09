@@ -58,7 +58,7 @@ secure-file-sharing/
 
 ### 1️⃣ Clone or Download the Project
 
-git clone https://github.com/srvijaycybersec-hue/secure-file-sharing.git
+git clone https://github.com/srvijaycybersec-hue/FUTURE_CS_03.git
 cd secure-file-sharing
 
 ### 2️⃣ Create and Activate Virtual Environment
